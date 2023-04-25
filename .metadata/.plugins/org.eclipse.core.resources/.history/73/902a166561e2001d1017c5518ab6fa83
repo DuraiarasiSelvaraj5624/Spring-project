@@ -1,0 +1,7 @@
+package com.example.demo.GadgetRepository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface GadgetRepo extends JpaRepository<T, ID> {
+
+}
