@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.retdetails.Model.RetdetailClass;
@@ -42,6 +45,23 @@ public class retdetailsService {
 		  repo.deleteById(id);
 		  return id+"Deleted";
 		}
+		public List <RetdetailClass> sorting(String nameString)
+		{
+			return repo.findAll(Sort.by(nameString).descending());
+		}
+		public List<RetdetailClass> pagination(int num,int size)
+		{
+			Page<RetdetailClass> r = repo.findAll(PageRequest.of(num, size));
+			return r.getContent();
+		}
+		
+		public List<RetdetailClass> pagesorting(int num,int size,String nameString)
+		{
+			Page<RetdetailClass> r = repo.findAll(PageRequest.of(num, size,Sort.by(nameString).descending()));
+			return r.getContent();
+		}
+		
+		
 	
 
 }

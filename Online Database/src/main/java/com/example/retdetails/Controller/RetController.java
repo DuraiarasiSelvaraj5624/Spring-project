@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.retdetails.Model.RetdetailClass;
+import com.example.retdetails.repository.retdetailsRepository;
 import com.example.retdetails.service.retdetailsService;
 
 @RestController
@@ -47,6 +48,22 @@ public class RetController {
 	{
 		return service.deleteRetdetailClass(id);
 	}
+	@GetMapping("/sorting/{nameString}")
+	public List <RetdetailClass> sortingDetails(@PathVariable String nameString)
+	{
+		return service.sorting(nameString);
+	}
+	@GetMapping("/pagination/{num}/{size}")
+	public List<RetdetailClass> paginationDetails(@PathVariable int num,@PathVariable int size)
+	{
+		return service.pagination(num, size);
+	}
+	@GetMapping("/pagesorting/{num}/{size}/{nameString}")
+	public List<RetdetailClass> pagesortingDetails(@PathVariable int num,@PathVariable int size,@PathVariable String nameString)
+	{
+		return service. pagesorting (num, size , nameString);
+	}
+	
 	
 
 }

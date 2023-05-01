@@ -3,16 +3,17 @@ package com.example.retdetails.Model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 
 @Entity
-
+@Table(name="details")
 public class RetdetailClass {
 	private int sno;
 	@Id
 	private int id;
 	
-	@Column(name = "Prdt Name")
+	@Column(name = "Cust Name")
 	private String nameString;
 	private String product;
 	private String productType;
