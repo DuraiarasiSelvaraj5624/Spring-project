@@ -1,8 +1,0 @@
-spring.datasource.url=jdbc://localhost:3306/gadget
-spring.datasource.username = root
-spring.datasource.password = duraiarasi5624@
-
-spring.jpa.show-sql=true
-spring.jpa.generate-ddl=true
-spring.jpa.hibernate.ddl-auto = update
-spring.jpa.properties.hibernate.dialet=org.hibernate.dialect.MySqlDialect

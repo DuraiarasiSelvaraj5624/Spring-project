@@ -1,7 +1,0 @@
-package com.example.retdetails.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface retdetailsRepository extends JpaRepository<T, ID> {
-
-}

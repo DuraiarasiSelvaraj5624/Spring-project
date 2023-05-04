@@ -15,40 +15,48 @@ import com.example.clownstars.repo.Clownrep;
 
 
 @Service
-public class Clownservice {
+public class Clownservice 
+{
 	@Autowired
 	Clownrep repository;
 	
-	public List<Clownmodel> getClowns(){
+	public List<Clownmodel> getClowns()
+	{
 		return repository.findAll();
 	}
-	public Optional<Clownmodel> getClownbyId(int id) {
+	public Optional<Clownmodel> getClownbyId(int id) 
+	{
 		return repository.findById(id);
 	}
-	public Clownmodel addClown(Clownmodel clown) {
+	public Clownmodel addClown(Clownmodel clown)
+	{
 		return repository.save(clown);
 	}
-	public Clownmodel editClown(Clownmodel clown, int id) {
+	public Clownmodel editClown(Clownmodel clown, int id) 
+	{
 		Clownmodel clownx = repository.findById(id).orElse(null);
-		if(clownx !=null) {
+		if(clownx !=null)
+		{
 			clownx.setCname(clown.getCname());
 			clownx.setAge(clown.getAge());
 			clownx.setColor(clown.getColor());
 			return repository.saveAndFlush(clownx);
 		}
-		else {
+		else 
+		{
 			return null;
 		}
 
 	}
-	public String deleteClown(int id) {
+	public String deleteClown(int id)
+	{
 		repository.deleteById(id);
 		return id + " deleted !";
 	}
 	public List<Clownmodel>sortDonors(String field)
-	  {
-		  return repository.findAll(Sort.by(field));
-	  }
+	{
+		 return repository.findAll(Sort.by(field));
+	}
 	public List<Clownmodel>pagingClowns(int offset,int pageSize)
 	  {
 		  Pageable paging=PageRequest.of(offset, pageSize);
@@ -60,12 +68,8 @@ public class Clownservice {
 	  {
 		  Pageable paging=PageRequest.of(offset, pageSize).withSort(Sort.by(field));
 		  Page<Clownmodel> repositor=repository.findAll(paging);
-		  return repositor.getContent();	  
+		  return repositor.getContent();
+	  }
 }
-}
-	  	
-	  	
-	  	
-
 
 	

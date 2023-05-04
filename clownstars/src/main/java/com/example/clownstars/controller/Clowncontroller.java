@@ -24,11 +24,13 @@ public class Clowncontroller {
 	private Clownservice service;
 	
 	@GetMapping
-	public List<Clownmodel> read(){
+	public List<Clownmodel> read()
+	{
 		return service.getClowns();
 	}
 	@GetMapping("/{id}")
-	public Optional<Clownmodel> readbyid(@PathVariable int id) {
+	public Optional<Clownmodel> readbyid(@PathVariable int id)
+	{
 		return service.getClownbyId(id);
 	}
 	@PostMapping
@@ -44,8 +46,8 @@ public class Clowncontroller {
 		return service.deleteClown(id);	
 	}
 
-//sorting
-@GetMapping("/sortDonors/{field}")
+    //sorting
+    @GetMapping("/sortDonors/{field}")
 
 	public List<Clownmodel>sortBooks(@PathVariable String field)
 	{
@@ -56,12 +58,11 @@ public class Clowncontroller {
 	{
 	return service.pagingClowns(offset,pageSize);
 	}
-//sorting and paging
-		@GetMapping("/pagingAndSortingDonors/{offset}/{pageSize}/{field}")
-		 public List<Clownmodel> pagingAndSortingDonors(@PathVariable int offset,@PathVariable int pageSize,@PathVariable String field)
-		 {
-			return service.pagingAndSortingClowns(offset,pageSize,field);
-		 }
-
-}
+	//sorting and paging
+	@GetMapping("/pagingAndSortingDonors/{offset}/{pageSize}/{field}")
+	 public List<Clownmodel> pagingAndSortingDonors(@PathVariable int offset,@PathVariable int pageSize,@PathVariable String field)
+	 {
+		return service.pagingAndSortingClowns(offset,pageSize,field);
+	 }
+}  
 
