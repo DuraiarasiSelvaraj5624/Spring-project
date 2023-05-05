@@ -17,6 +17,9 @@ import com.example.retdetails.Model.RetdetailClass;
 import com.example.retdetails.repository.retdetailsRepository;
 import com.example.retdetails.service.retdetailsService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.TableGenerator;
+
 @RestController
 @RequestMapping("/api")
 public class RetController {
@@ -65,5 +68,90 @@ public class RetController {
 	}
 	
 	
+	
+	//Native
+	
+	@Autowired
+	public retdetailsRepository repo;
+	@Tag(name="Get Query" ,description=" getting all using native query")
+	
+	@GetMapping("/query")
+	public List<RetdetailClass> getAll()
+	{
+		return repo.get();
+	}
+	
+	@Tag(name="Get QuerybyId" ,description=" getting details by Id using native query")
+	@GetMapping("/queryget/{id}")
+	public List<RetdetailClass> getdetails(@PathVariable int id)
+	{
+		return repo.getD(id);
+	}
+	
+	
+	@Tag(name="Update QuerybyId" ,description=" updating id using native query")
+	@PutMapping("/queryupdate/{id}/{nameString}")
+	public void updateDetails(@PathVariable int id,@PathVariable String nameString)
+	{
+		 repo.update(id,nameString); 
+	}
+	
+	
+	@Tag(name="Delete QuerybyId and Name" ,description=" deleting details by Id and Name using native query")
+	@DeleteMapping("/deletequery/{id}/{nameString}")
+	public String deleteDetails(@PathVariable int id,@PathVariable String nameString)
+	{
+		
+		repo.deleteById(id,nameString);
+		return "Deleted Successfully";
+	}
+	
+	@Tag(name="Delete QuerybyId" ,description=" deleting details by Id using native query")
+	@DeleteMapping("/delete/{id}")
+	public String deleteD(@PathVariable int id)
+	{
+		
+		repo.delete(id);
+		return "Deleted Successfully";
+	}
+	
+	
+
+	
+	//jpql
+	
+	@Tag(name="Get JPQLQuerybyId" ,description=" getting details by Id using JPQL query")
+	@GetMapping("/jpql/{id}")
+	public List<RetdetailClass> get(@PathVariable int id)
+	{
+		return repo.getDetails(id);
+	}
+	
+	
+	
+	
+	@Tag(name="Get JPQLQuery using like" ,description=" getting details by like using JPQL query")
+	@GetMapping("/jpql/like")
+	public List<RetdetailClass> getHFirms()
+	{
+		return repo.getH();
+	}
+	
+	
+	
+	@Tag(name="Get JPQLQuery Between" ,description=" getting details between ranges  using JPQL query")
+	@GetMapping("/jqpl/between/{id}/{pid}")
+	public List<RetdetailClass> getR(@PathVariable int id,@PathVariable int pid)
+	{
+		return repo.getRange(id,pid);
+	} 	
+	
+	
+	
+	@GetMapping("/jqpl/in")
+	public List<RetdetailClass> getDetails()
+	{
+		return repo.getD();
+	}
 
 }

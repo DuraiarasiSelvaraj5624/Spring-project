@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.example.clownstars.model.Clownmodel;
+import com.example.clownstars.repo.Clownrep;
+
 import com.example.clownstars.service.Clownservice;
 
 
@@ -64,5 +67,70 @@ public class Clowncontroller {
 	 {
 		return service.pagingAndSortingClowns(offset,pageSize,field);
 	 }
-}  
+	
+	
+	
+	//@RestController
+	//@RequestMapping("/question")
+	//public class Controllerq {
+		
+		@Autowired
+		Clownrep repo;
+		
+		
+		@PostMapping("")
+		public String saveDetails(@RequestBody Clownmodel q)
+		{
+			repo.save(q);
+			return "Data is saved";
+		}
+	
+	@GetMapping("/query")
+
+	public List<Clownmodel> getAll()
+
+	{
+
+		return repo.get();
+
+	}
+
+	
+
+	@GetMapping("/queryget/{pno}")
+
+	public List<Clownmodel> getdetails(@PathVariable int pno)
+
+	{
+
+		return repo.getD(pno);
+
+	}
+
+	
+
+	@PutMapping("/queryupdate/{pno}/{name}")
+
+	public void updateDetails(@PathVariable int pno,@PathVariable String name)
+
+	{
+
+		 repo.update(pno,name); 
+
+	}
+
+	
+
+	@DeleteMapping("/deletequery/{pno}/{name}")
+
+	public String deleteDetails(@PathVariable int pno,@PathVariable String name)
+
+	{
+
+		
+
+		repo.deleteById(pno,name);
+
+		return "Deleted Successfully";}
+	}
 
