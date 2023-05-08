@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import com.example.clownstars.model.Clownmodel;
 import com.example.clownstars.repo.Clownrep;
 
+import jakarta.transaction.Transactional;
+
 
 @Service
 public class Clownservice 
@@ -70,6 +72,29 @@ public class Clownservice
 		  Page<Clownmodel> repositor=repository.findAll(paging);
 		  return repositor.getContent();
 	  }
-}
+	  @Transactional
+	  public int deleteClownmodelByName(String cname)
+	  {
+	  	return repository.deleteStudentByName(cname);
+	  } 
+	  public List<Clownmodel> fetchAll()
+	  {
+	 	 return repository.findAll();
+	  }
+	  public Clownmodel saveAll(Clownmodel s)
+	  {
+	 	 return repository.save(s);
+	  }
+	  public List<Clownmodel> fetchid(int id)
+	  {
+	 	   return repository.getClownmodelByid(id);
+	  }
+	  public Clownmodel fetchbyname(String cname)
+	  {
+	 	   return repository.findClownmodelByName(cname);
+	  }
+
+	 }
+
 
 	

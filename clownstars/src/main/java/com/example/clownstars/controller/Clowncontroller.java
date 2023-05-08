@@ -20,11 +20,12 @@ import com.example.clownstars.repo.Clownrep;
 import com.example.clownstars.service.Clownservice;
 
 
+
 @RestController
 @RequestMapping("/clowns")
 public class Clowncontroller {
 	@Autowired
-	private Clownservice service;
+     Clownservice service;
 	
 	@GetMapping
 	public List<Clownmodel> read()
@@ -67,70 +68,36 @@ public class Clowncontroller {
 	 {
 		return service.pagingAndSortingClowns(offset,pageSize,field);
 	 }
-	
-	
-	
-	//@RestController
-	//@RequestMapping("/question")
-	//public class Controllerq {
-		
-		@Autowired
-		Clownrep repo;
-		
-		
-		@PostMapping("")
-		public String saveDetails(@RequestBody Clownmodel q)
-		{
-			repo.save(q);
-			return "Data is saved";
-		}
-	
-	@GetMapping("/query")
-
-	public List<Clownmodel> getAll()
-
-	{
-
-		return repo.get();
-
-	}
-
-	
-
-	@GetMapping("/queryget/{pno}")
-
-	public List<Clownmodel> getdetails(@PathVariable int pno)
-
-	{
-
-		return repo.getD(pno);
-
-	}
+	@DeleteMapping("/deleteClownmodelByName/{cname}")
+	   public String deleteClownmodelByName(@PathVariable String cname)
+	   {
+	   int result=service.deleteClownmodelByName(cname)	;
+	   if(result >0)
+	   	return "deleted successfully";
+	   else
+	   	return "Problem occured while deleting";
+	   }
+	@GetMapping("/fetchAll")
+	   public List<Clownmodel> fetchAll()
+	   {
+		  return  service.fetchAll();
+	   }  
+	   @GetMapping("/fetchbyname/{cname}")
+	   public Clownmodel fetchbyname(@PathVariable String cname)
+	   {
+		   return service.fetchbyname(cname);
+	   }
+	   @PostMapping("/saveAll")
+	   public Clownmodel saveAll(@RequestBody Clownmodel s)
+	   {
+	  	 return service.saveAll(s);
+	   }
+	   @GetMapping("/fetch/{dep}")
+	   public List<Clownmodel> fetchid(@PathVariable int id)
+	   {
+		   return service.fetchid(id);
+	   }
 
 	
-
-	@PutMapping("/queryupdate/{pno}/{name}")
-
-	public void updateDetails(@PathVariable int pno,@PathVariable String name)
-
-	{
-
-		 repo.update(pno,name); 
-
-	}
-
-	
-
-	@DeleteMapping("/deletequery/{pno}/{name}")
-
-	public String deleteDetails(@PathVariable int pno,@PathVariable String name)
-
-	{
-
-		
-
-		repo.deleteById(pno,name);
-
-		return "Deleted Successfully";}
-	}
+}
 
